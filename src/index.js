@@ -17,7 +17,10 @@ render(
   <React.StrictMode>
     <BrowserRouter>
     <UserProvider> 
-     <App />
+      <ProductProvider>
+      <App />
+      </ProductProvider>
+     
     </UserProvider>
     </BrowserRouter>
   </React.StrictMode>,

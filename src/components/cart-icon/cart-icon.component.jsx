@@ -1,4 +1,5 @@
 import { useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import { ReactComponent as ShoppingIcon } from '../../assets/shopping-bag.svg';
 

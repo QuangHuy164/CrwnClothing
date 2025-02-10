@@ -1,4 +1,4 @@
-[
+const SHOP_DATA = [
     {
       "id": 1,
       "name": "Brown Brim",
@@ -54,4 +54,5 @@
       "price": 16
     }
   ]
-  
+
+  export default SHOP_DATA;

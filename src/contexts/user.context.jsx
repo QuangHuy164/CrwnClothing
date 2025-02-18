@@ -1,4 +1,4 @@
-import { createContext, useState, useEffect } from "react";
+import { createContext, useState, useEffect, useReducer } from "react";
 
 import { 
     onAuthStateChangedListener, createUserDocumentFromAuth,
@@ -8,6 +8,15 @@ export const UserContext = createContext({
     currentUser: null,
     setCurrentUser: () => null,
 });
+
+const userReducer = (state, action) => {
+  const {type, payload} = action;
+
+  switch(type) {
+    case 'SET_CURRENT_USER':
+      default:
+  }
+}
 
 export const UserProvider = ({ children }) => {
     const [currentUser, setCurrentUser] = useState(null);

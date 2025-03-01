@@ -1,5 +1,6 @@
 //import { type } from "@testing-library/user-event/dist/type";
-import { createContext, useEffect, useReducer, useState } from "react";
+import { createContext, useReducer } from "react";
+import {createAction} from '../utils/firebase/reducer/reducer.utils'
 
 const addCartItem = (cartItems, productToAdd) => {
   const existingCartItem = cartItems.find(
@@ -43,6 +44,11 @@ export const CartContext = createContext({
   cartTotal: 0,
 });
 
+const CART_ACTION_TYPES = {
+  'SET_IS_CART_OPEN': 'SET_IS_CART_OPEN',
+  "SET_CART_ITEMS": "SET_CART_ITEMS"
+}
+
 const INITIAL_STATE = {
   isCartOpen: false,
   cartItems: [],
@@ -54,10 +60,15 @@ const cartReducer = (state, action) => {
   const { type, payload } = action;
 
   switch (type) {
-    case "ADD_TO_CART":
+    case CART_ACTION_TYPES.SET_CART_ITEMS:
       return {
         ...state,
         ...payload,
+      };
+      case CART_ACTION_TYPES.SET_IS_CART_OPEN:
+      return {
+        ...state,
+        isCartOpen: payload,
       };
     default:
       throw new Error(`unhandled type of ${type} in cartReduce`);
@@ -77,14 +88,12 @@ export const CartProvider = ({ children }) => {
       (total, cartItem) => total + cartItem.quantity * cartItem.price,
       0
     );
-    dispatch({
-      type: "SET_CART_ITEMS",
-      payload: {
+    dispatch(
+      createAction(CART_ACTION_TYPES.SET_CART_ITEMS, {
         cartItems: newCartItems,
         cartTotal: newCartTotal,
         cartCount: newCartCount,
-      },
-    });
+      }))
   };
 
   const addItemToCart = (productToAdd) => {
@@ -100,9 +109,13 @@ export const CartProvider = ({ children }) => {
     const newCartItems = clearCartItem(cartItems, cartItemToClear);
     updateCartItemsReducer(newCartItems);
   };
+
+  const setIsCartOpen = (bool) => {
+    dispatch(createAction(CART_ACTION_TYPES.SET_IS_CART_OPEN, bool))
+  }
   const value = {
     isCartOpen,
-    setIsCartOpen: ()=>{},
+    setIsCartOpen,
     addItemToCart,
     removeItemToCart,
     clearItemFromCart,

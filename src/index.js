@@ -1,11 +1,11 @@
 import React from 'react';
 import { render } from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
-import {store} from './store/store'
+import { store } from './store/store'
 
 import './index.scss';
 import App from './App';
-import { CategoriesProvider } from './contexts/products.context';
+
 import { CartProvider } from './contexts/cart.context';
 
 import './index.scss';
@@ -16,18 +16,18 @@ const rootElement = document.getElementById('root');
 
 render(
   <React.StrictMode>
-    
+
     <BrowserRouter>
-    <Provider store={store}>
- 
-      <CategoriesProvider>
+      <Provider store={store}>
+
+
         <CartProvider>
-         <App />
-       </CartProvider>
-      </CategoriesProvider>
-     
- 
-    </Provider>
+          <App />
+        </CartProvider>
+
+
+
+      </Provider>
     </BrowserRouter>
   </React.StrictMode>,
   rootElement

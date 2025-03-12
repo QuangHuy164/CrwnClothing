@@ -1,12 +1,11 @@
 import React from 'react';
 import { render } from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
-import { store } from './store/store'
+import { store, persistor } from './store/store'
 
-import './index.scss';
+import { PersistGate } from 'redux-persist/integration/react';
 import App from './App';
 
-import { CartProvider } from './contexts/cart.context';
 
 import './index.scss';
 
@@ -16,20 +15,15 @@ const rootElement = document.getElementById('root');
 
 render(
   <React.StrictMode>
-
-    <BrowserRouter>
-      <Provider store={store}>
-
-
-        <CartProvider>
+    <Provider store={store}>
+      <PersistGate loading={null} persistor= {persistor}>
+        <BrowserRouter>
           <App />
-        </CartProvider>
-
-
-
-      </Provider>
-    </BrowserRouter>
-  </React.StrictMode>,
+          </BrowserRouter>
+      </PersistGate>
+  
+    </Provider>
+  </React.StrictMode >,
   rootElement
 );
 

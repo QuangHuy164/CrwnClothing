@@ -42,16 +42,16 @@ const addCartItem = (cartItems, productToAdd) => {
 export const setIsCartOpen = (boolean) => 
     createAction(CART_ACTION_TYPES.SET_IS_CART_OPEN, boolean)
 
-export const addItemToCart = (productToAdd) => {
+export const addItemToCart = (cartItems,productToAdd) => {
     const newCartItems = addCartItem(cartItems, productToAdd);
     return createAction(CART_ACTION_TYPES.SET_CART_ITEMS,newCartItems);
   };
 
-export  const removeItemFromCart = (cartItemToRemove) => {
+export  const removeItemFromCart = (cartItemToRemove, cartItems) => {
     const newCartItems = removeCartItem(cartItems, cartItemToRemove);
     return createAction(CART_ACTION_TYPES.SET_CART_ITEMS,newCartItems);
   };
- export const clearItemFromCart = (cartItemToClear) => {
+ export const clearItemFromCart = (cartItemToClear,cartItems) => {
     const newCartItems = clearCartItem(cartItems, cartItemToClear);
     return createAction(CART_ACTION_TYPES.SET_CART_ITEMS,newCartItems);
   };

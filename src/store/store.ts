@@ -8,13 +8,14 @@ import { rootSaga } from './root-saga'
 
 import { rootReducer} from './root-reducer'
 
+export type RootState = ReturnType<typeof rootReducer>
 
 const sagaMiddleware = createSagaMiddleware()
 
 const persistConfig = {
     key: 'root',
     storage,
-    blacklist: ['user']
+    whitelist: ['cart']
 }
 
 const persistReducer = persistReducer(persistConfig, rootReducer)

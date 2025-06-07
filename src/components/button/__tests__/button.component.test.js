@@ -7,4 +7,7 @@ describe('button test', () => {
         const buttonElement = screen.getByText(/test/i);
         expect(buttonElement).toHaveStyle('background-color: black')
     })
+    test('should render google button', () => {
+        render(<Button />)
+    })
 })
